@@ -14,7 +14,12 @@
  ```
 then open your browser and go to 127.0.0.1:5000
 
-### Description:
+### Prerequisites: 
+* Flask
+* Python
+
+
+## Description:
 
 #### Load files
 The UI enables reading an image with its openpose detection output (.json). 
@@ -44,17 +49,12 @@ After you finish correcting your keypoints, you can save a new JSON file with th
 The file will be named with a postfix "_corrected.json"
 
 
-### Credits:
+## Credits:
 
 Please cite this repo in case of using it. 
 
 * Thanks to Etienne Balit for his help. 
 * Reference image credits: Openpose: https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/output.md
-
-
-### Prerequisites: 
-* Flask
-* Python
 
 
 ## ToDos: 
