@@ -53,7 +53,7 @@ The file will be named with a postfix "_corrected.json"
 
 Please cite this repo in case of using it. 
 
-* Thanks to Etienne Balit for his help. 
+* Thanks to [Etienne Balit](https://github.com/etiennebalit) for his advices. 
 * Reference image credits: Openpose: https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/output.md
 
 
