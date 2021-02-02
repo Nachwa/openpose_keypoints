@@ -3,7 +3,7 @@
 ## A tool to load, view, correct keypoints of openpose 
 
 <p align="center">
-<img width="800" src="screenshot_openpose_editor.png">
+<img width="1000" src="screenshot_openpose_editor.png">
 </p>
 
 ## Getting started: 
