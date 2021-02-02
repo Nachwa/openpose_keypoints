@@ -15,6 +15,7 @@
 
 ### Prerequisites: 
 * Flask
+* Python
 
 
 ## ToDos: 
