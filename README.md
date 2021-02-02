@@ -41,7 +41,7 @@ You can also search for a keypoint in using its id. A keypoint id is defined by 
 
 #### Delete a keypoint
 You can also delete a keypoint by clicking on it then pressing DEL or Backspace. 
-Deleting a keypoint sets it to (0, 0) position with confidance 0%.
+Deleting a keypoint sets it to (0, 0) position with confidence 0%.
 
 
 #### Save new JSON
@@ -60,6 +60,6 @@ Please cite this repo in case of using it.
 ## ToDos: 
 * [x] search by id 
 * [ ] add option to add a new skeleton (does not exist in the openpose file)
-* [ ] add option to choose if changing the confidance score of dragged keypoints to 100% or not.
+* [ ] add option to choose if changing the confidence score of dragged keypoints to 100% or not.
 * [ ] add possibility to read other types of keypoint files (e.g. COCO)
 * [ ] read from a folder to pass through multiple images
