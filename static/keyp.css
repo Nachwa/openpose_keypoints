@@ -1,0 +1,157 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    font-family: monospace;
+    background: black;
+    color: white;
+    padding: 60px 10px 10px 10px;
+    margin:0;
+}
+
+h2 {
+    text-align: center;
+    background: rgb(37, 37, 37);
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    line-height: 50px;
+}
+
+#header {
+    display: flex;
+    width: 100%;
+    height: 350px;
+}
+
+h3 {
+    margin-block-end: 5px;
+    margin-block-start: 5px;
+}
+
+#controlPanel {
+    flex:1;
+    padding: 15px;
+    background: rgb(68, 68, 68);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#controlPanel div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#controlPanel form {
+    padding: 3px 0px;
+    display: flex;
+    justify-content: right;
+}
+
+#searchKeyword {
+    width: 25%;
+}
+
+#referenceImages {
+    flex: 3;
+    display: flex;
+    justify-content: stretch;
+}
+
+#referenceImages div {
+    height: 100%;
+}
+
+#referenceImages div img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.draggable {
+    cursor: move;
+  }
+
+.img-overlay-wrap {
+    position: relative;
+    display: inline-block; /* <= shrinks container to image size */
+    transition: transform 150ms ease-in-out;
+}
+
+.img-overlay-wrap img { /* <= optional, for responsiveness */
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.img-overlay-wrap svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+g.tooltip text {
+    pointer-events:none; /*let mouse events pass through*/
+    opacity:0;
+    font-size: 40px;
+    stroke: rgba(255, 255, 255, 1);
+    stroke-width: 8px;
+    paint-order: stroke;
+}
+
+circle:hover + text  {
+    opacity:1;
+}
+
+g.tooltip circle.hidden {
+    display:none;
+}
+
+#mouseLocationLabel {
+    pointer-events:none;
+    font-size: 50px;
+    stroke: white;
+    stroke-width: 8px;
+    paint-order: stroke;
+    pointer-events: none;
+}
+
+.savebtn {
+    font-weight: bold;
+    font-size: 14px;
+    width: 100%;
+}
+
+.glow {
+    animation-name: glow;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    stroke: red;
+    paint-order: stroke;
+    stroke-opacity: 0.6;
+}
+
+@keyframes glow {
+    0% {
+        stroke-width: 0;
+    }
+    50% {
+        stroke-width: 100;
+    }
+    100% {
+        stroke-width: 0;
+    }
+  }

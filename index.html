@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Openpose Keypoints Editor</title>
+  <meta name="author" content="Nachwa Bakr">
+  <meta name="description" content="A Tool to load, view and correct Openpose keypoints">
+</head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='keyp.css') }}">
+
+<body>
+  <h2>Openpose Keypoints Editor</h2>
+  <div id="header">
+    <div id="controlPanel">
+      <div>
+        <h3>Upload your files: </h3>
+        <form method=post enctype=multipart/form-data>
+          <input type=file name=file>
+          <input type=submit value=Upload>
+        </form>
+        <div>
+          <label><b>IMG file:</b> {{ img_src.split('/')[-1] }}</label>
+          <label><b>JSON file:</b> {{ keyp_src.split('/')[-1] }}</label></div>
+      </div>
+      <div>
+        <h3>View options: </h3>
+        <label><input type="checkbox" onclick='showSkeleton(this)' checked>Skeleton keypoints</label>
+        <label><input type="checkbox" onclick="showFace(this)" checked>Face keypoints</label>
+        <label><input type="checkbox" onclick="showHands(this)" checked>Hands keypoints</label>
+      </div>
+      <div>
+        <h3>Select a keypoint by Id:</h3>
+        <form action="javascript:void(0);">
+          <input type="search" id="searchKeyword" pattern="[0-9]_[0-3]_[0-9]+" title="personid_categoryid_keypointid, Regex: [0-9]_[0-3]_[0-9]+">
+          <input id="submitSearch" type="submit" onclick="searchKeypoint()">
+        </form>
+        <label>E.g. 0_0_0 selects the nose of the P0</label>
+      </div>
+      <div>
+        <button onclick="saveKeypoints()" class="savebtn">Save keypoints to JSON</button>
+      </div>
+    </div>
+    <div id="referenceImages">
+      <div><img src="static/keypoints_pose_25.png" width="588px" height="1024px"></div>
+      <div><img src="static/keypoints_face.png" width="1004px" height="556px"></div>
+      <div><img src="static/keypoints_hand.png" width="816px" height="1056px" style="filter: invert(1)"></div>
+    </div>
+  </div>
+  <div class="img-overlay-wrap">
+    <img id="myimage" src="{{ img_src }}">
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {{ img_size[0] }} {{ img_size[1] }}"
+      onload="makeDraggable(evt)">
+
+      {% for key, item in kpnts.items() %}
+      <g class="tooltip css" transform="translate({{item[0]}}, {{item[1]}})" keypoint_id="{{key}}" conf="{{item[2]}}">
+        <circle class="draggable" fill="{{keyprop[1][loop.index0]}}" cx="0" cy="0" r="10"></circle>
+        <text id="tooltipText" x="20" dy="10" text-anchor="left" fill="red">[P{{key.split('_')[0]}}]
+          {{keyprop[0][loop.index0]}} : {{(100*item[2])|int}}%</text>
+      </g>
+      {% endfor %}
+    </svg>
+    <script type="text/javascript" src="{{ url_for('static', filename='skeleton.js') }}"></script>
+
+  </div>
+
+</body>
