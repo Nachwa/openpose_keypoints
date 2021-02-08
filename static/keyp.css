@@ -80,6 +80,26 @@ h3 {
     object-fit: contain;
 }
 
+#guidePanel {
+    background: rgb(68, 68, 68);
+    border-radius: 5px;
+    padding: 5px 15px;
+}
+
+#guidePanel ul{
+    padding-inline-start: 0px;
+    margin-block-start: 0em;
+    list-style-type: none;
+}
+
+#zoomImage-container {
+    position: relative;
+  }
+#zoomImage {
+    border: 1px solid;
+    height: 100px;
+}
+
 .draggable {
     cursor: move;
   }

@@ -32,7 +32,8 @@
       <div>
         <h3>Select a keypoint by Id:</h3>
         <form action="javascript:void(0);">
-          <input type="search" id="searchKeyword" pattern="[0-9]_[0-3]_[0-9]+" title="personid_categoryid_keypointid, Regex: [0-9]_[0-3]_[0-9]+">
+          <input type="search" id="searchKeyword" pattern="[0-9]_[0-3]_[0-9]+"
+            title="personid_categoryid_keypointid, Regex: [0-9]_[0-3]_[0-9]+">
           <input id="submitSearch" type="submit" onclick="searchKeypoint()">
         </form>
         <label>E.g. 0_0_0 selects the nose of the P0</label>
@@ -46,10 +47,42 @@
       <div><img src="static/keypoints_face.png" width="1004px" height="556px"></div>
       <div><img src="static/keypoints_hand.png" width="816px" height="1056px" style="filter: invert(1)"></div>
     </div>
+    <div id="guidePanel">
+      <div id="helpPanel">
+        <div>
+          <label><b>User Guide:</b></label>
+          <ul>
+            <li>[DEL | &larr;] Del a keypoint</li>
+            <li>[c | +] Increase conf by 20%</li>
+            <li>[d | -] Decrease conf by 20%</li>
+          </ul>
+        </div>
+        <div>
+          <label><b>Keypoints:</b></label>
+          <ul>
+            <li>0 : Skeleton</li>
+            <li>1 : Face</li>
+            <li>2 : Left hand</li>
+            <li>3 : Right hand</li>
+          </ul>
+        </div>
+      </div>
+      <div id="statusPanel">
+        <label><b>Status box:</b></label>
+        <ul>
+          <li>Mouse Pos : <label id="mouseLocation"></label></li>
+          <li>Selected keypoint ID : <label id="selectedKey">None</label></li>
+          <li>Confidence : <label id="confidence">None</label></li>
+        </ul>
+        <div id="zoomImage-container">
+          
+          <div id="zoomImage"></div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="img-overlay-wrap">
     <img id="myimage" src="{{ img_src }}">
-
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {{ img_size[0] }} {{ img_size[1] }}"
       onload="makeDraggable(evt)">
 
@@ -61,8 +94,6 @@
       </g>
       {% endfor %}
     </svg>
-    <script type="text/javascript" src="{{ url_for('static', filename='skeleton.js') }}"></script>
-
   </div>
-
+  <script type="text/javascript" src="{{ url_for('static', filename='skeleton.js') }}"></script>
 </body>
