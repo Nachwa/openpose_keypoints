@@ -58,8 +58,9 @@ Please cite this repo in case of using it.
 
 ## ToDos: 
 * [x] search by id 
-* [ ] add option to add a new skeleton (that does not exist in the openpose file)
 * [x] add zoom preview on the image while hover.
-* [x] add option to choose if changing the confidence score of dragged keypoints to 100% or not.
+* [x] add option to control the confidence score of selected keypoints.
+* [ ] add option to add a new skeleton (that does not exist in the openpose file)
+* [ ] add option to multi-select keypoints by dragging on the image.
 * [ ] add possibility to read other types of keypoint files (e.g. COCO)
 * [ ] read from a folder to pass through multiple images
