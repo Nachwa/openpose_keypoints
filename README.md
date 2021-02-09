@@ -17,7 +17,7 @@ then open your browser and go to 127.0.0.1:5000
 ### Prerequisites: 
 * Flask
 * Python
-
+* Tested on Google Chrome.
 
 ## Description:
 
@@ -26,7 +26,7 @@ The UI enables reading an image with its openpose detection output (.json).
 Once the image file and JSON file is loaded, the tool plots a point each keyjoint. 
 * To see more information about each keypoint, you can use hover with your mouse. 
 * You can select a keypoint and move it around. 
-* You see the selected keypoint ID and confidence at the status box. 
+* You see the selected keypoint ID and its confidence at the status box. 
 * You can change the confidence of a selected keypoint by pressing ("+" or "c") keys to increase it by 20% every time you press. You can also decrease a keypoint confidence by pressing ("-" or "d") keys to decrease a keypoint confidence by 20%.
 
 #### View options
@@ -44,11 +44,9 @@ You can also search for a keypoint in using its id. A keypoint id is defined by 
 * You can also delete a keypoint by clicking on it then pressing DEL or Backspace. 
 * Deleting a keypoint sets it to (0, 0) position with confidence 0%.
 
-
 #### Save new JSON
 * After you finish correcting your keypoints, you can save a new JSON file with the new keypoints. 
 * The file will be named with a postfix "_corrected.json"
-
 
 ## Credits:
 
