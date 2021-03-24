@@ -21,6 +21,7 @@ def load_json(filename):
         keypoints_json = json.load(keypoints_file)
     
     if len(keypoints_json['people']) > 0:
+        global json_dict_keys
         json_dict_keys = list(keypoints_json['people'][0].keys())
     return keypoints_json
 
@@ -54,10 +55,11 @@ def add_person(keypoints_dict, keypoint_names, colors_names):
     return keypoints_dict, (keypoint_names, colors_names)
 
 def get_new_person_dict():
+    global json_dict_keys
     new_person_dict = {'person_id': [-1]}
     new_person_dict.update({k: [0]*(3*len(kn)) for k, kn in zip(keypoint_categories, keynames)})
     for k in json_dict_keys:
-        if k not in new_person_dict:
+        if not k in new_person_dict:
             new_person_dict[k] = []
     return new_person_dict
 
