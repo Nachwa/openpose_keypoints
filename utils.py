@@ -9,6 +9,7 @@ keypoint_categories = ['pose_keypoints_2d', 'face_keypoints_2d', 'hand_left_keyp
 colors = ["#ffbf00", "#ff00af", "#5d8aa8", "#fe6f5e", "#8a2be2", "#006a4e", "#4b3621", "#0047ab", "#00ffff", "#734f96"]
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'json'}
+json_dict_keys = []
 
 import json, os
 from PIL import Image
@@ -18,6 +19,9 @@ from werkzeug.utils import secure_filename
 def load_json(filename):
     with open(filename) as keypoints_file:
         keypoints_json = json.load(keypoints_file)
+    
+    if len(keypoints_json['people']) > 0:
+        json_dict_keys = list(keypoints_json['people'][0].keys())
     return keypoints_json
 
 def read_json(filename):
@@ -36,10 +40,30 @@ def read_json(filename):
                 colors_names.append(colors[p%len(colors)])
     return keypoints_dict, (keypoint_names, colors_names)
 
+def add_person(keypoints_dict, keypoint_names, colors_names):
+    num_keypoints = sum([len(k) for k in keynames])
+    p_id = len(keypoints_dict.values())//num_keypoints
+    
+    for cat, keypoints in enumerate(keypoint_categories):
+        keypoints_arr = np.zeros((len(keynames[cat]), 3), dtype=np.float)
+        for i, (x, y, c) in enumerate(keypoints_arr):
+            keypoints_dict[f'{p_id}_{cat}_{i}'] = [x, y, c] 
+            keypoint_names.append(keynames[cat][i])
+            colors_names.append(colors[p_id%len(colors)])
+
+    return keypoints_dict, (keypoint_names, colors_names)
+
+def get_new_person_dict():
+    new_person_dict = {'person_id': [-1]}
+    new_person_dict.update({k: [0]*(3*len(kn)) for k, kn in zip(keypoint_categories, keynames)})
+    for k in json_dict_keys:
+        if k not in new_person_dict:
+            new_person_dict[k] = []
+    return new_person_dict
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 
 def get_metadate(filename):

@@ -188,7 +188,19 @@ function searchKeypoint() {
     cir_keypoint.classList.add('glow');
 }
 
-// save keypoints to json
+
+// add new person to keypoints
+function addNewPerson() {
+    function reloadPage(){
+        window.location.href = window.location.href
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.onloadend = reloadPage();
+    xhr.open('POST', '/add_person');
+    xhr.send();
+}
+
+//  save keypoints to json
 function saveKeypoints() {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/save_json');
@@ -197,7 +209,7 @@ function saveKeypoints() {
 
 //submit form when 'Enter' key is pressed while in submitSearch
 document.getElementById("searchKeyword").addEventListener("keyup", function (event) {
-    if (event.keyCode === 13) {
+    if (event.key === 13) {
         searchKeypoint();
     }
 });

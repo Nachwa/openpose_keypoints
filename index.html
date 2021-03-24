@@ -30,6 +30,9 @@
         <label><input type="checkbox" onclick="showHands(this)" checked>Hands keypoints</label>
       </div>
       <div>
+        <button onclick="addNewPerson()" class="newbtn">Add new person</button>
+      </div>
+      <div>
         <h3>Select a keypoint by Id:</h3>
         <form action="javascript:void(0);">
           <input type="search" id="searchKeyword" pattern="[0-9]_[0-3]_[0-9]+"
@@ -75,7 +78,6 @@
           <li>Confidence : <label id="confidence">None</label></li>
         </ul>
         <div id="zoomImage-container">
-          
           <div id="zoomImage"></div>
         </div>
       </div>

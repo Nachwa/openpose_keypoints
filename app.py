@@ -13,12 +13,10 @@ app.secret_key = 'sds'
 
 app.add_url_rule('/uploads/<filename>', 'uploads')
 app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-    '/uploads':  app.config['UPLOAD_FOLDER']
-})
-
+                    '/uploads':  app.config['UPLOAD_FOLDER']
+                })
 
 JSON_file, IMG_file = "", ""
-
 IMG_SIZE = 0, 0
 keypoints_dict = {}
 keypoint_names, colors_names = [], []
@@ -43,6 +41,7 @@ def load_data():
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
+
         if file and allowed_file(file.filename):
             if file.filename.rsplit('.', 1)[1].lower() == 'json':
                 filename = upload_file(file)
@@ -52,8 +51,7 @@ def load_data():
                 filename = upload_file(file)
                 IMG_SIZE = get_metadate(filename)
                 IMG_file = filename
-    
-    
+       
     return render_template('index.html',
                 keyp_src=JSON_file,
                 img_src=IMG_file,
@@ -61,6 +59,12 @@ def load_data():
                 kpnts = keypoints_dict, 
                 keyprop = (keypoint_names, colors_names))
 
+
+@app.route("/add_person", methods=['POST'])
+def add_new_person():
+    global keypoints_dict, keypoint_names, colors_names
+    keypoints_dict, (keypoint_names, colors_names) = add_person(keypoints_dict, keypoint_names, colors_names)
+    return redirect(url_for('load_data'))
 
 @app.route("/update_data", methods=["POST"])
 def update_keypoints():
@@ -78,14 +82,14 @@ def update_keypoints():
 def save_json():
     global keypoints_dict
     keypoints_json = load_json(JSON_file)
-        for key_id in keypoints_dict:
-            p, cat, k = key_id.split('_')
-            p, cat, k = int(p), int(cat), int(k)
+    for key_id in keypoints_dict:
+        p, cat, k = key_id.split('_')
+        p, cat, k = int(p), int(cat), int(k)
         if p >= len(keypoints_json['people']):
             keypoints_json['people'].append(get_new_person_dict())
-            keypoints_json['people'][p]['person_id'] = [p]
-            keypoints_json['people'][p][keypoint_categories[cat]][k*3:k*3+3] = keypoints_dict[key_id]
-    
+        keypoints_json['people'][p]['person_id'] = [p]
+        keypoints_json['people'][p][keypoint_categories[cat]][k*3:k*3+3] = keypoints_dict[key_id]
+
     fname = JSON_file.split('/')[-1].split('.json')[0]
     with open(f'./corrected_json/{fname}_corrected.json', 'w') as keypoints_file:
         json.dump(keypoints_json, keypoints_file)
