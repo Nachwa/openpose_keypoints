@@ -1,3 +1,6 @@
 corrected_json/*.json
 
 *.pyc
+
+uploads/*.json
+uploads/*.png
