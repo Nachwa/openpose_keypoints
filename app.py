@@ -78,20 +78,18 @@ def update_keypoints():
 def save_json():
     global keypoints_dict
     keypoints_json = load_json(JSON_file)
-    clicked = request.values.get('save')
-    if clicked:
         for key_id in keypoints_dict:
             p, cat, k = key_id.split('_')
             p, cat, k = int(p), int(cat), int(k)
+        if p >= len(keypoints_json['people']):
+            keypoints_json['people'].append(get_new_person_dict())
             keypoints_json['people'][p]['person_id'] = [p]
             keypoints_json['people'][p][keypoint_categories[cat]][k*3:k*3+3] = keypoints_dict[key_id]
     
-    fname = JSON_file.split('.json')[0]
-    with open(f'{fname}_corrected.json', 'w') as keypoints_file:
+    fname = JSON_file.split('/')[-1].split('.json')[0]
+    with open(f'./corrected_json/{fname}_corrected.json', 'w') as keypoints_file:
         json.dump(keypoints_json, keypoints_file)
     return {}
-
-
 
 
 if __name__ == '__main__':

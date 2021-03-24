@@ -191,10 +191,8 @@ function searchKeypoint() {
 // save keypoints to json
 function saveKeypoints() {
     var xhr = new XMLHttpRequest();
-    var data = new FormData();
-    data.append('save', 1);
-    xhr.open('POST', '/save_json')
-    xhr.send(data)
+    xhr.open('POST', '/save_json');
+    xhr.send();
 }
 
 //submit form when 'Enter' key is pressed while in submitSearch
